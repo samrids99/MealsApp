@@ -7,10 +7,18 @@ import {
   Platform,
 } from "react-native";
 
-function MealItem({ title, imageUrl, duration, complexity, affordability }) {
+function MealItem({
+  title,
+  imageUrl,
+  duration,
+  complexity,
+  affordability,
+  onPress,
+}) {
   return (
     <View style={styles.mealItem}>
       <Pressable
+        onPress={onPress}
         style={({ pressed }) => (pressed ? styles.buttonPressed : null)}
       >
         <View style={styles.innerContainer}>
