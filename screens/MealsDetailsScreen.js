@@ -1,7 +1,9 @@
-import { Image, Text, StyleSheet, View } from "react-native";
+import { Image, Text, StyleSheet, View, ScrollView } from "react-native";
 import { useLayoutEffect } from "react";
 import { MEALS } from "../data/dummy-data";
 import MealDetails from "../components/MealDetails";
+import SubTitle from "../components/MealDetails/SubTitle";
+import List from "../components/MealDetails/List";
 
 function MealsDetailsScreen({ route, navigation }) {
   const mealId = route.params.mealId;
@@ -18,9 +20,10 @@ function MealsDetailsScreen({ route, navigation }) {
 
   return (
     <>
-      <View>
-        <Image source={{ uri: selectedMeal.imageUrl }} />
-        <Text>{selectedMeal.title}</Text>
+      <ScrollView style={styles.rootContainer}>
+        {/* must use width and height for network img */}
+        <Image style={styles.image} source={{ uri: selectedMeal.imageUrl }} />
+        <Text style={styles.title}>{selectedMeal.title}</Text>
         <View>
           <MealDetails
             complexity={selectedMeal.complexity}
@@ -28,19 +31,40 @@ function MealsDetailsScreen({ route, navigation }) {
             duration={selectedMeal.duration}
           />
         </View>
-        <Text>Ingredients</Text>
-        {selectedMeal.ingredients.map((ingredient) => (
-          <Text key={ingredient}>{ingredient}</Text>
-        ))}
-        <Text>Steps</Text>
-        {selectedMeal.steps.map((step) => (
-          <Text key={step}>{step}</Text>
-        ))}
-      </View>
+        <View style={styles.listOuterContainer}>
+          <View style={styles.listContainer}>
+            <SubTitle>Ingredients</SubTitle>
+            <List listItems={selectedMeal.ingredients} />
+            <SubTitle>Steps</SubTitle>
+            <List listItems={selectedMeal.steps} />
+          </View>
+        </View>
+      </ScrollView>
     </>
   );
 }
 
 export default MealsDetailsScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  rootContainer: {
+    marginBottom: 32,
+  },
+  image: {
+    width: "100%",
+    height: 350,
+  },
+  title: {
+    fontWeight: "bold",
+    fontSize: 24,
+    margin: 8,
+    textAlign: "center",
+    color: "rgb(117, 99, 143)4)",
+  },
+  listContainer: {
+    width: "80%",
+  },
+  listOuterContainer: {
+    alignItems: "center",
+  },
+});
