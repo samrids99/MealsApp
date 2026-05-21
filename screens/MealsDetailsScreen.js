@@ -5,6 +5,7 @@ import MealDetails from "../components/MealDetails";
 import SubTitle from "../components/MealDetails/SubTitle";
 import List from "../components/MealDetails/List";
 import { Button } from "react-native";
+import IconButton from "../components/IconButton";
 
 function MealsDetailsScreen({ route, navigation }) {
   const mealId = route.params.mealId;
@@ -19,7 +20,13 @@ function MealsDetailsScreen({ route, navigation }) {
     navigation.setOptions({
       title: mealTitle,
       headerRight: () => {
-        return <Button title="tap me" onPress={headerButtonPresshandler} />;
+        return (
+          <IconButton
+            icon="star"
+            color="black"
+            onPress={headerButtonPresshandler}
+          />
+        );
       },
     });
   }, [mealId, navigation, headerButtonPresshandler]);
