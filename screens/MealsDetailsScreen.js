@@ -4,17 +4,25 @@ import { MEALS } from "../data/dummy-data";
 import MealDetails from "../components/MealDetails";
 import SubTitle from "../components/MealDetails/SubTitle";
 import List from "../components/MealDetails/List";
+import { Button } from "react-native";
 
 function MealsDetailsScreen({ route, navigation }) {
   const mealId = route.params.mealId;
+
+  function headerButtonPresshandler() {
+    console.log("header button pressed");
+  }
 
   useLayoutEffect(() => {
     const mealTitle = MEALS.find((meal) => meal.id == mealId).title;
 
     navigation.setOptions({
       title: mealTitle,
+      headerRight: () => {
+        return <Button title="tap me" onPress={headerButtonPresshandler} />;
+      },
     });
-  }, [mealId, navigation]);
+  }, [mealId, navigation, headerButtonPresshandler]);
 
   const selectedMeal = MEALS.find((meal) => meal.id == mealId);
 
