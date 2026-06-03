@@ -24,6 +24,7 @@ function MealsList({ items, navigation }) {
   return (
     <View style={styles.container}>
       <FlatList
+        style={styles.listStyle}
         data={items}
         keyExtractor={(item) => item.id}
         renderItem={renderMealItem}
@@ -38,5 +39,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    backgroundColor: "rgb(232, 214, 255)",
+  },
+  listStyle: {
+    backgroundColor: "rgb(232, 214, 255)",
   },
 });
